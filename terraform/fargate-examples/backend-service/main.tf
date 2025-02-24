@@ -4,14 +4,13 @@ provider "aws" {
 
 locals {
   name   = "ecsdemo-backend"
-  region = "us-west-2"
+  region = "us-east-1"
 
   container_image = "public.ecr.aws/aws-containers/ecsdemo-nodejs:c3e96da"
   container_port  = 3000 # Container port is specific to this app example
 
   tags = {
-    Blueprint  = local.name
-    GithubRepo = "github.com/aws-ia/ecs-blueprints"
+    Name        = local.name
   }
 }
 
@@ -24,7 +23,7 @@ module "ecs_service" {
   version = "~> 5.6"
 
   name               = local.name
-  desired_count      = 3
+  desired_count      = 2
   cluster_arn        = data.aws_ecs_cluster.core_infra.arn
   enable_autoscaling = false
 
@@ -33,6 +32,8 @@ module "ecs_service" {
 
   container_definitions = {
     ecsdemo-nodejs = {
+      cpu                      = 256
+      memory                   = 512
       image                    = local.container_image
       readonly_root_filesystem = false
 
@@ -97,7 +98,7 @@ resource "aws_service_discovery_service" "this" {
 data "aws_subnets" "private" {
   filter {
     name   = "tag:Name"
-    values = ["core-infra-private-*"]
+    values = ["private"]
   }
 }
 
