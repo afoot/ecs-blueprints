@@ -60,6 +60,14 @@ module "vpc" {
   public_subnets  = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 8, k)]
   private_subnets = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 8, k + 10)]
 
+  private_subnet_tags = {
+    "Name" = "Private"
+  }
+
+  public_subnet_tags = {
+    "Name" = "Public"
+  }
+
   enable_nat_gateway = true
   single_nat_gateway = true
 
