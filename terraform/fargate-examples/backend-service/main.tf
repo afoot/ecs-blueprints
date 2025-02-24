@@ -10,7 +10,7 @@ locals {
   container_port  = 3000 # Container port is specific to this app example
 
   tags = {
-    Name        = local.name
+    Name = local.name
   }
 }
 
@@ -98,7 +98,7 @@ resource "aws_service_discovery_service" "this" {
 data "aws_subnets" "private" {
   filter {
     name   = "tag:Name"
-    values = ["private"]
+    values = ["Private"]
   }
 }
 

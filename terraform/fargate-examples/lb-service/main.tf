@@ -182,14 +182,14 @@ data "aws_vpc" "vpc" {
 data "aws_subnets" "public" {
   filter {
     name   = "tag:Name"
-    values = ["public"]
+    values = ["Public"]
   }
 }
 
 data "aws_subnets" "private" {
   filter {
     name   = "tag:Name"
-    values = ["private"]
+    values = ["Private"]
   }
 }
 
