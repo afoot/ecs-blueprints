@@ -6,7 +6,7 @@ data "aws_caller_identity" "current" {}
 
 locals {
   name   = "ecsdemo-queue-proc"
-  region = "us-west-2"
+  region = "us-east-1"
 
   container_name = "ecsdemo-queue-proc"
 

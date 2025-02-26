@@ -1,12 +1,12 @@
 provider "aws" {
-  region = "us-west-2"
+  region = local.region
 }
 
 data "aws_caller_identity" "current" {}
 
 locals {
   name   = "ecsdemo-queue"
-  region = "us-west-2"
+  region = "us-east-1"
 
   container_name = "ecsdemo-queue"
 
@@ -20,9 +20,8 @@ locals {
   metric_namespace          = "ECS-SQS-BPI"
 
   tags = {
-    Blueprint  = local.name
-    GithubRepo = "github.com/aws-ia/ecs-blueprints"
-  }
+    Name  = local.name
+   }
 }
 
 ################################################################################
